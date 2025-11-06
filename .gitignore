@@ -1,3 +1,4 @@
 node_modules
 .env
 smart-firebse-admin-key.json
+.vercel

@@ -4,13 +4,18 @@ require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const admin = require("firebase-admin");
 const jwt = require("jsonwebtoken");
-const serviceAccount = require("./smart-firebse-admin-key.json");
+// const serviceAccount = require("./smart-firebse-admin-key.json");
 const app = express();
 const port = process.env.PORT || 5000;
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+
+// index.js
+const decoded = Buffer.from(process.env.FIREBASE_SERVICE_KEY, "base64").toString("utf8");
+const serviceAccount = JSON.parse(decoded);
 
 //middleware
 app.use(cors());
@@ -83,7 +88,7 @@ app.get("/", (req, res) => {
 
 async function run() {
   try {
-    // await client.connect();
+    await client.connect();
 
     const db = client.db("smart_db");
     const productsCollection = db.collection("products");
