@@ -61,7 +61,7 @@ const verifyJwtToken = (req, res, next) => {
     if (err) {
       return res.status(401).send({ message: "unauthorized access" });
     }
-    console.log("after decoded", decoded);
+    // console.log("after decoded", decoded);
     req.token_email = decoded.email;
     next();
   });
@@ -83,7 +83,7 @@ app.get("/", (req, res) => {
 
 async function run() {
   try {
-    await client.connect();
+    // await client.connect();
 
     const db = client.db("smart_db");
     const productsCollection = db.collection("products");
@@ -242,7 +242,7 @@ async function run() {
       res.send(result);
     });
 
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
